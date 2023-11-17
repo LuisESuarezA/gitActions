@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -21,11 +21,4 @@ jobs:
       - name: Run Python files
         run: python -m compileall .
 
-      - name: Check for errors
-        run: |
-          if [ -z "$(find . -name '*.pyc')" ]; then
-            echo "All Python files are error-free."
-          else
-            echo "Error: Some Python files have errors."
-            exit 1
 
