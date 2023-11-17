@@ -21,4 +21,13 @@ jobs:
       - name: Run Python files
         run: python -m compileall .
 
+      - name: Check for errors
+        run: |
+          if [ -z "$(find . -name '*.pyc')" ]; then
+            echo "No errors found in Python files."
+          else
+            echo "Errors found in Python files."
+            exit 1
+          fi
+
 
