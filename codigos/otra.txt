@@ -1,0 +1,1 @@
+El código de Fibonacci es un algoritmo que genera una secuencia de números en la que cada número es la suma de los dos números anteriores. La secuencia comienza con 0 y 1, y luego cada número subsiguiente es la suma de los dos números anteriores.
