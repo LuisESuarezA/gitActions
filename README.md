@@ -1,5 +1,5 @@
 ### **github actions**
-### *DEBEN CREAR UN REPOSITORIO VACIO, ES IMPORTANTE PARA LA PRIMER PRUEBA* (No hagan un fork)
+### *DEBEN CREAR UN REPOSITORIO VACIO, ES IMPORTANTE PARA LA PRIMER PRUEBA* (No hagan un fork, clonen el repo en su compu local)
 ## Presentación
 Seguiremos la presentaciíon en la liga: https://docs.google.com/presentation/d/1oCzrbKf_WR93Dtlcr6eJuRsisWOZvf1fBgHJDvzAX9k/edit?usp=sharing
 ## Repositorio
