@@ -1,17 +1,17 @@
 name: Print Pushed Files
 
-on: [push]
+on:
+  push:
 
 jobs:
-    print_files:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            -name: Checkout Repository
-            uses: actions/checkout@v3
-            with:
-                fetch-depth: 2
-            
-            -name: Print Pushed Files
-            run: |
-                git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
+  print_files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Print Pushed Files
+        run: |
+          git diff-tree --no-commit-id --name-only -r ${{ github.sha }}
