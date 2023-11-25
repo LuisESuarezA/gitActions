@@ -19,7 +19,7 @@ jobs:
             - name: Check commit message
               id: check_commit_message
               run: |
-                  if [[ "${{ github.event.head_commit.message }}" == "282542200" ]]; then
+                  if [[ "${{ github.event.head_commit.message }}" == "hola yo no soy OMAR" ]]; then
                       echo "::set-output name=accept_push::true"
                   else
                       echo "::set-output name=accept_push::false"
