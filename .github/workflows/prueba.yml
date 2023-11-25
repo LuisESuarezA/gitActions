@@ -6,33 +6,33 @@ jobs:
     deny-push-and-auto-merge:
         runs-on: ubuntu-latest
         
-    steps:
-        - name: Check commit author and name
-        id: check_actor
-        run: |
-            if [[ "${{ github.actor}}" == "OMAR"]]; then
-                echo "::set-output name=deny_push::true"
-            else
-                echo "::set-output name=deny_push::false"
-            fi
-        
-        - name: Check commit message
-        id: check_commit_message
-        run: |
-            if [[ "${{ github.event.head_commit.message}}" == "282542200" ]]; then
-                echo "::set-output name=accept_push::true"
-            else
-                echo "::set-output name=accept_push::false"
-            fi
-        
-        - name: Deny push
-        if: steps.check_actor.outputs.deny_push == 'true' || steps.check_commit_message.outputs.accept_push == 'false'
-        run: |
-            echo "You are not allowed to push to this repository"
-            exit 1
+        steps:
+            - name: Check commit author and name
+              id: check_actor
+              run: |
+                  if [[ "${{ github.actor }}" == "OMAR" ]]; then
+                      echo "::set-output name=deny_push::true"
+                  else
+                      echo "::set-output name=deny_push::false"
+                  fi
+            
+            - name: Check commit message
+              id: check_commit_message
+              run: |
+                  if [[ "${{ github.event.head_commit.message }}" == "282542200" ]]; then
+                      echo "::set-output name=accept_push::true"
+                  else
+                      echo "::set-output name=accept_push::false"
+                  fi
+            
+            - name: Deny push
+              if: steps.check_actor.outputs.deny_push == 'true' || steps.check_commit_message.outputs.accept_push == 'false'
+              run: |
+                  echo "You are not allowed to push to this repository"
+                  exit 1
 
-        - name: Allow push
-        if: steps.check_actor.outputs.deny_push == 'false' && steps.check_commit_message.outputs.accept_push == 'true'
-        run: |
-            echo "You are allowed to push to this repository"
-            git merge <branch_name>
+            - name: Allow push
+              if: steps.check_actor.outputs.deny_push == 'false' && steps.check_commit_message.outputs.accept_push == 'true'
+              run: |
+                  echo "You are allowed to push to this repository"
+                  git merge <branch_name>
