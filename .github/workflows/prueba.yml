@@ -24,15 +24,3 @@ jobs:
                   else
                       echo "::set-output name=accept_push::false"
                   fi
-            
-            - name: Deny push
-              if: steps.check_actor.outputs.deny_push == 'true' || steps.check_commit_message.outputs.accept_push == 'false'
-              run: |
-                  echo "You are not allowed to push to this repository"
-                  exit 1
-
-            - name: Allow push
-              if: steps.check_actor.outputs.deny_push == 'false' && steps.check_commit_message.outputs.accept_push == 'true'
-              run: |
-                  echo "You are allowed to push to this repository"
-                  git merge <branch_name>
