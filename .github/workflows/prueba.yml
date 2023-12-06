@@ -1,0 +1,26 @@
+name: Chequeador Inicial
+
+on: [push]
+
+jobs:
+    deny-push-and-auto-merge:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Check commit author and name
+              id: check_actor
+              run: |
+                  if [[ "${{ github.actor }}" == "OMAR" ]]; then
+                      echo "::set-output name=deny_push::true"
+                  else
+                      echo "::set-output name=deny_push::false"
+                  fi
+            
+            - name: Check commit message
+              id: check_commit_message
+              run: |
+                  if [[ "${{ github.event.head_commit.message }}" == "hola yo no soy OMAR" ]]; then
+                      echo "::set-output name=accept_push::true"
+                  else
+                      echo "::set-output name=accept_push::false"
+                  fi
