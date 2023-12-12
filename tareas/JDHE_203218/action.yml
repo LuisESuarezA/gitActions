@@ -1,0 +1,39 @@
+name: Run Python Scripts
+
+on: [push, pull_request]
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install -r ./requirements.txt
+
+    - name: Execute Python Scripts
+      run: |
+        success_count=0
+        error_scripts=""
+        for script in code/*.py; do
+          if python "$script"; then
+            success_count=$((success_count+1))
+          else
+            script_name=$(basename "$script")
+            error_scripts+=" $script_name"
+            break  # Terminar al encontrar el primer error
+          fi
+        done
+        if [ -n "$error_scripts" ]; then
+          echo "Error: The following scripts failed to run:$error_scripts"
+          echo "Successfully ran $success_count scripts before encountering an error."
+          exit 1
+        fi
